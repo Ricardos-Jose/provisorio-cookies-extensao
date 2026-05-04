@@ -1,92 +1,81 @@
-# Cookie Shop — Static HTML5 + CSS Site
+## Goal
 
-A pure static, multi-page cookie shop. No JavaScript, no frameworks, no build step. Just HTML files and one shared stylesheet, served from the project's `public/` folder so the preview can serve them directly.
+Make the 5 static pages communicate via a single vanilla JS file: products and the trio builder add items to a shared cart (persisted in `localStorage`), the cart page reads/edits that cart, and the checkout form — after passing native HTML5 validation — opens WhatsApp with the full order pre-written to the store number **+55 11 95149-0211**.
 
-## File structure
+No frameworks, no build step. The original earthy/editorial design stays untouched.
 
+## Files
+
+### New
+- `public/js/app.js` — single shared script, loaded with `defer` on every page.
+
+### Edited
+- `public/index.html` — add cart badge in header, wrap each product in a small add-to-cart form, include `app.js`.
+- `public/trio.html` — change the final CTA into a form that reads checked flavors and adds a single "Trio editorial" line item; include `app.js`.
+- `public/carrinho.html` — replace mocked `<tbody>` rows with a JS-rendered list; add empty state; include `app.js`.
+- `public/checkout.html` — order summary aside becomes JS-rendered from cart; form submission builds the WhatsApp message; include `app.js`.
+- `public/sobre.html` — include `app.js` so the header cart badge updates.
+- `public/css/style.css` — small additions only: cart-count badge, qty input styling, empty-cart state, add-to-cart confirmation toast.
+
+## How it works
+
+### Cart module (in `app.js`)
+- Storage key: `forno-lento-cart`
+- Shape: `[{ id, name, price, qty }]` (price in BRL cents to avoid float issues)
+- API: `add(item)`, `update(id, qty)`, `remove(id)`, `clear()`, `getAll()`, `getSubtotal()`, `getCount()`
+- After every mutation: persist to localStorage and refresh any `[data-cart-count]`, `[data-cart-body]`, `[data-cart-summary]`, `[data-cart-subtotal]`, `[data-cart-total]` nodes on the current page.
+
+### Per-page wiring
+- **All pages**: header gets a small `<span data-cart-count>` badge next to the Carrinho link.
+- **index.html**: each product card wrapped in `<form data-add-to-cart>` with hidden `id`, `name`, `price` inputs and an "Adicionar ao carrinho" button. Submit handler `preventDefault`s and calls `cart.add(...)`, then shows a brief inline confirmation under the button.
+- **trio.html**: existing checkboxes kept. Final CTA becomes a form; on submit, JS reads the 3 checked flavors (validates exactly 3) and adds one item: `{ id: "trio-" + sortedIds, name: "Trio editorial (Flavor A, Flavor B, Flavor C)", price: 3600, qty: 1 }`. Then redirects to `/carrinho.html`.
+- **carrinho.html**: `<tbody data-cart-body>` rendered from cart. Each row has a numeric qty input (`min=1`) that calls `update`, and a "Remover" button that calls `remove`. Subtotal, fixed delivery (R$ 12,00 if cart not empty, else R$ 0), and total rendered live. Empty state replaces table when cart is empty, with a link back to products.
+- **checkout.html**: order summary aside rendered from cart. Form keeps native HTML5 validation. On `submit`:
+  1. `if (!form.checkValidity()) { form.reportValidity(); return; }`
+  2. Build message (template below).
+  3. `window.open("https://wa.me/5511951490211?text=" + encodeURIComponent(message), "_blank")`.
+  4. `cart.clear()`, redirect to `/index.html` with a `?pedido=enviado` query param so the landing can show a thank-you banner.
+
+### WhatsApp message template
 ```
-public/
-  index.html       Landing + Products
-  trio.html        Build Your Trio (checkbox-only)
-  carrinho.html    Cart with mocked items
-  checkout.html    Checkout form (HTML5 validation)
-  sobre.html       About
-  css/
-    style.css      Single shared stylesheet
+*Novo pedido — Forno Lento*
+
+Itens:
+• Trio editorial (Limão, Cardamomo, Cacau) × 1 — R$ 36,00
+• Limão Siciliano × 2 — R$ 26,00
+Subtotal: R$ 62,00
+Entrega: R$ 12,00
+*Total: R$ 74,00*
+
+Cliente: <nome>
+Telefone: <telefone>
+E-mail: <email>
+
+Entrega:
+<endereço>, <número> <complemento>
+<cidade> / <estado> — CEP <cep>
+
+Pagamento: <pix | cartão de crédito | boleto>
+Observações: <…ou "—" se vazio>
 ```
 
-The existing React app stays in place but the static site lives under `public/` so each page is reachable directly (e.g. `/index.html`, `/trio.html`). The published preview entry point will be the static `index.html`.
+## Constants
 
-## Design system
+```js
+const STORE_WHATSAPP = "5511951490211"; // wa.me format, digits only
+const DELIVERY_BRL_CENTS = 1200;
+```
 
-- Background: `#FAF7F2`
-- Text: `#1A1208`
-- CTA / accent: `#3B2507`
-- Subtle dividers / muted text: derived warm browns (e.g. `#C9BFB1`, `#5C4632`) — earthy only, no neon
-- Typography (Google Fonts):
-  - Headings: Playfair Display (editorial serif, generous sizes, tight leading)
-  - Body: Lora (warm, readable serif)
-- No icons, no gradients, no shadows beyond a soft hairline border
-- Generous whitespace, large hero type, image-led product cards, editorial captions
-- Buttons: solid `#3B2507` background, cream text, square or 2px radius, uppercase tracked label
+## Out of scope
 
-## Pages
+- No backend, no real payment, no order persistence beyond localStorage.
+- Stock/availability checks.
+- Discount codes.
+- Server-side WhatsApp Business API (the wa.me link opens the user's WhatsApp with the message pre-filled; they tap send).
 
-### 1. index.html — Landing + Products
-- Top nav: Início, Produtos, Carrinho, Sobre (Trio is intentionally NOT in nav)
-- Hero: large editorial headline + subcopy + CTA "Monte seu trio" → `trio.html`
-- Story strip: short paragraph about the bakery
-- Products grid: 6–8 cookie cards (image placeholder, name, short description, price). CSS Grid, 1 col mobile → 2 col tablet → 3 col desktop
-- Secondary CTA band linking again to `trio.html`
-- Footer with links to Sobre and Carrinho
+## Acceptance
 
-### 2. trio.html — Build Your Trio
-- Linked only from the Landing page (hero CTA + band), not from main nav
-- Intro copy explaining "pick any 3 cookies for a fixed price"
-- A `<form>` (action `carrinho.html`, method `get`) with a grid of cookie options as `<label>` + `<input type="checkbox">`. Each label shows cookie name, short note, and uses CSS to style the selected state via `:checked + ...` / `:has()` where supported
-- Submit button "Adicionar ao carrinho" → goes to `carrinho.html`
-- Note: with no JS we can't enforce "exactly 3" — copy will state the rule, and the cart page will show a fixed mocked trio
-
-### 3. carrinho.html — Cart (mocked)
-- Heading "Seu carrinho"
-- Table/list of 3–4 mocked line items (name, qty, unit price, line total) using semantic `<table>` styled as an editorial list on desktop and stacked cards on mobile
-- Order summary block: subtotal, shipping, total
-- Two actions: "Continuar comprando" → `index.html`, and primary "Finalizar compra" → `checkout.html` (only entry point to checkout)
-
-### 4. checkout.html — Checkout
-- Heading + short reassurance copy
-- Two-column layout on desktop (form left, order summary right), single column on mobile
-- Native HTML5 form with required validation:
-  - Nome completo (`required`, `minlength`)
-  - Email (`type="email"`, `required`)
-  - Telefone (`type="tel"`, `pattern`, `required`)
-  - CEP (`pattern="\d{5}-?\d{3}"`, `required`)
-  - Endereço, Número, Cidade, Estado (`required`)
-  - Forma de pagamento (`<select required>`: Pix, Cartão, Boleto)
-  - Observações (`<textarea>`, optional)
-- Submit button "Confirmar pedido" (form `action="#"` since no backend)
-- Order summary mirrors cart totals
-
-### 5. sobre.html — About
-- Editorial long-form layout: large headline, lede paragraph, two-column body text on desktop
-- Sections: Nossa história, Ingredientes, Onde encontrar
-- Quiet footer
-
-## Navigation rules
-- Main nav (every page except trio/checkout for clarity): Início · Produtos (anchor to `#produtos` on index) · Carrinho · Sobre
-- `trio.html` reachable only via Landing CTAs
-- `checkout.html` reachable only via the Cart's "Finalizar compra" button
-- All navigation is plain `<a href="...">` — no JS routing
-
-## Responsive approach
-- Mobile-first base styles
-- Breakpoints: `min-width: 640px` (tablet), `min-width: 960px` (desktop)
-- Layouts use Flexbox for nav/footer/summary rows and CSS Grid for product/trio grids
-- Fluid type using `clamp()` for headings
-
-## Technical notes
-- Files placed in `public/` so Vite serves them as-is at the root path; no React involvement on those routes
-- Google Fonts loaded via `<link rel="preconnect">` + stylesheet link in each page's `<head>`
-- One shared `public/css/style.css` imported by every page
-- Cookie images: use neutral placeholder image (`/placeholder.svg` already in project) so no external assets are required; real photography can be swapped in later
-- No JavaScript anywhere; checkbox "selected" visuals done purely with CSS sibling/`:has()` selectors with a graceful fallback border
+- Adding a product on the landing increments the header cart badge on every page.
+- Building a trio adds a single "Trio editorial" line and navigates to the cart.
+- Cart page reflects current state, supports qty change and remove, shows empty state.
+- Checkout summary matches cart; submitting an invalid form shows native validation; submitting a valid form opens WhatsApp to **+55 11 95149-0211** with the full order message and clears the cart.
