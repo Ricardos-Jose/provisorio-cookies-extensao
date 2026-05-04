@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monte seu trio — Forno Lento</title>
+  <meta name="description" content="Escolha três cookies do nosso menu e leve por um preço fixo. Embalagem editorial inclusa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/index.html" class="brand">Forno Lento</a>
+      <nav class="main-nav" aria-label="Principal">
+        <ul>
+          <li><a href="/index.html">Início</a></li>
+          <li><a href="/index.html#produtos">Produtos</a></li>
+          <li><a href="/carrinho.html">Carrinho</a></li>
+          <li><a href="/sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <span class="section-eyebrow">Combinação favorita</span>
+        <h1>Monte seu trio</h1>
+        <p>Selecione três receitas. A caixa sai do forno na manhã da entrega, embrulhada em papel manteiga e selo de cera.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <form class="trio-form" action="/carrinho.html" method="get">
+          <p class="trio-rule">Escolha exatamente três · R$ 36 a caixa</p>
+
+          <div class="trio-grid">
+            <div class="trio-option">
+              <input type="checkbox" name="cookie" value="chocolate-duplo" id="c1" />
+              <label for="c1">
+                <h3>Chocolate Duplo</h3>
+                <p class="note">Cacau 70%, flor de sal.</p>
+              </label>
+            </div>
+            <div class="trio-option">
+              <input type="checkbox" name="cookie" value="avela-queimada" id="c2" />
+              <label for="c2">
+                <h3>Avelã Queimada</h3>
+                <p class="note">Manteiga noisette e mascavo.</p>
+              </label>
+            </div>
+            <div class="trio-option">
+              <input type="checkbox" name="cookie" value="aveia-passas" id="c3" />
+              <label for="c3">
+                <h3>Aveia & Passas ao Rum</h3>
+                <p class="note">Passas hidratadas em rum escuro.</p>
+              </label>
+            </div>
+            <div class="trio-option">
+              <input type="checkbox" name="cookie" value="limao-siciliano" id="c4" />
+              <label for="c4">
+                <h3>Limão Siciliano</h3>
+                <p class="note">Raspas frescas, demerara.</p>
+              </label>
+            </div>
+            <div class="trio-option">
+              <input type="checkbox" name="cookie" value="tahine-mel" id="c5" />
+              <label for="c5">
+                <h3>Tahine & Mel</h3>
+                <p class="note">Mel silvestre, gergelim torrado.</p>
+              </label>
+            </div>
+            <div class="trio-option">
+              <input type="checkbox" name="cookie" value="amendoa-cardamomo" id="c6" />
+              <label for="c6">
+                <h3>Amêndoa & Cardamomo</h3>
+                <p class="note">Sem glúten, cardamomo verde.</p>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn" type="submit">Adicionar ao carrinho</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <ul>
+        <li><a href="/index.html">Início</a></li>
+        <li><a href="/sobre.html">Sobre</a></li>
+        <li><a href="/carrinho.html">Carrinho</a></li>
+      </ul>
+      <p>© Forno Lento — São Paulo</p>
+    </div>
+  </footer>
+</body>
+</html>
