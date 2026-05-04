@@ -434,3 +434,93 @@ section { padding: 3.5rem 0; }
 }
 .about-body h2 { font-size: 1.5rem; margin-bottom: .75rem; }
 .about-body p { color: var(--muted); }
+
+/* Cart count badge in nav */
+.main-nav [data-cart-count]:not(:empty) {
+  margin-left: .35rem;
+  color: var(--cta);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+/* Add-to-cart on product cards */
+.product form[data-add-to-cart] {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: .5rem;
+}
+.product .btn-add {
+  background: transparent;
+  color: var(--cta);
+  border: 1px solid var(--cta);
+  padding: .55rem 1.1rem;
+  font-family: 'Lora', serif;
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.product .btn-add:hover { background: var(--cta); color: var(--cream); }
+.add-confirm {
+  font-size: .8rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* Cart page extras */
+.qty-input {
+  width: 4.5rem;
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: .45rem .55rem;
+  text-align: right;
+}
+.qty-input:focus { outline: 2px solid var(--cta); outline-offset: 1px; border-color: var(--cta); }
+.link-remove {
+  display: inline-block;
+  margin-top: .35rem;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--muted);
+  font-family: 'Lora', serif;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+.link-remove:hover { color: var(--cta); border-bottom-color: var(--cta); }
+
+.cart-empty {
+  text-align: center;
+  padding: 2rem 0 1rem;
+}
+.cart-empty p { color: var(--muted); margin-bottom: 1.5rem; }
+
+/* Trio validation message */
+.trio-msg {
+  text-align: center;
+  color: #8a2a16;
+  font-style: italic;
+  margin-top: 1rem;
+  min-height: 1.4em;
+}
+
+/* Order confirmation banner */
+.order-banner {
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+  padding: 1.25rem 0;
+  text-align: center;
+}
+.order-banner p {
+  margin: 0;
+  color: var(--text);
+  font-style: italic;
+}
