@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
+  <script defer src="/js/app.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -18,7 +19,7 @@
         <ul>
           <li><a href="/index.html">Início</a></li>
           <li><a href="/index.html#produtos">Produtos</a></li>
-          <li><a href="/carrinho.html">Carrinho</a></li>
+          <li><a href="/carrinho.html">Carrinho <span data-cart-count></span></a></li>
           <li><a href="/sobre.html">Sobre</a></li>
         </ul>
       </nav>
@@ -36,7 +37,7 @@
 
     <section>
       <div class="container checkout-wrap">
-        <form action="#" method="post" novalidate-disabled>
+        <form data-checkout-form novalidate>
           <div class="field-group">
             <h2>Contato</h2>
             <div class="fields cols-2">
@@ -111,13 +112,8 @@
           </div>
         </form>
 
-        <aside class="summary" aria-label="Resumo do pedido">
+        <aside class="summary" aria-label="Resumo do pedido" data-cart-summary>
           <h2>Seu pedido</h2>
-          <div class="row"><span>Trio editorial</span><span>R$ 36,00</span></div>
-          <div class="row"><span>Limão Siciliano × 2</span><span>R$ 26,00</span></div>
-          <div class="row"><span>Amêndoa & Cardamomo</span><span>R$ 16,00</span></div>
-          <div class="row"><span>Entrega</span><span>R$ 12,00</span></div>
-          <div class="row total"><span>Total</span><span>R$ 90,00</span></div>
         </aside>
       </div>
     </section>
