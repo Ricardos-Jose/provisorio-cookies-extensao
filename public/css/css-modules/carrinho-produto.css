@@ -1,0 +1,29 @@
+.product form[data-add-to-cart] {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.product .btn-add {
+  background: transparent;
+  color: var(--cta);
+  border: 1px solid var(--cta);
+  padding: 0.55rem 1.1rem;
+  font-family: 'Lora', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.product .btn-add:hover {
+  background: var(--cta);
+  color: var(--cream);
+}
+.add-confirm {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--muted);
+}

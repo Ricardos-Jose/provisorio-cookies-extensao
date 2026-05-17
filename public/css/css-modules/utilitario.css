@@ -1,0 +1,42 @@
+/*TOPO PÁGINA*/
+.page-head {
+  text-align: center;
+  padding: 4rem 0 2rem;
+  border-bottom: 1px solid var(--line);
+}
+.page-head p {
+  color: var(--muted);
+  max-width: 50ch;
+  margin: 0 auto;
+}
+/* */
+.story {
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+.story p {
+  max-width: 56ch;
+  margin: 0 auto;
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+
+/*PEDIDO*/
+.order-banner {
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+  padding: 1.25rem 0;
+  text-align: center;
+}
+.order-banner p {
+  margin: 0;
+  color: var(--text);
+  font-style: italic;
+}
+/*PEDIDO CONTAGEM */
+.main-nav [data-cart-count]:not(:empty) {
+  margin-left: 0.35rem;
+  color: var(--cta);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}

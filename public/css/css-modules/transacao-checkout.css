@@ -1,0 +1,75 @@
+.checkout-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 960px) {
+  .checkout-wrap {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+.field-group {
+  margin-bottom: 2.5rem;
+}
+.field-group h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 640px) {
+  .fields.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 640px) {
+  .fields.cols-3 {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+.field label {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.field input,
+.field select,
+.field textarea {
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 0.85rem 1rem;
+  border-radius: 0;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 2px solid var(--cta);
+  outline-offset: 1px;
+  border-color: var(--cta);
+}
+.field input:invalid:not(:placeholder-shown),
+.field select:invalid:not(:focus) {
+  border-color: #8a2a16;
+}
+.field textarea {
+  min-height: 110px;
+  resize: vertical;
+}

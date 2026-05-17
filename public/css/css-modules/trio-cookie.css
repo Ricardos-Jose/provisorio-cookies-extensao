@@ -1,0 +1,105 @@
+/* MENSAGEM VALIDAÇÃO  */
+.trio-msg {
+  text-align: center;
+  color: #8a2a16;
+  font-style: italic;
+  margin-top: 1rem;
+  min-height: 1.4em;
+}
+
+.trio-form {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.trio-rule {
+  text-align: center;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+.trio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.trio-option {
+  position: relative;
+}
+.trio-option input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  cursor: pointer;
+}
+.trio-option label {
+  display: block;
+  border: 1px solid var(--line);
+  padding: 1.5rem;
+  cursor: pointer;
+  background: var(--bg);
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  height: 100%;
+}
+.trio-option input:focus-visible + label {
+  outline: 2px solid var(--cta);
+  outline-offset: 2px;
+}
+.trio-option:has(input:checked) label,
+.trio-option input:checked + label {
+  border-color: var(--cta);
+  background: var(--cream);
+}
+.trio-option h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+}
+.trio-option .note {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+@media (min-width: 640px) {
+  .trio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 960px) {
+  .trio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/*CLASSE DA SECTION*/
+
+.cta-band {
+  background: var(--text);
+  color: var(--cream);
+  text-align: center;
+}
+.cta-band h2 {
+  color: var(--cream);
+}
+.cta-band p {
+  color: var(--cream);
+  opacity: 0.8;
+  max-width: 50ch;
+  margin: 0 auto 2rem;
+}
+.cta-band .btn {
+  background: var(--cream);
+  color: var(--text);
+  border-color: var(--cream);
+}
+.cta-band .btn:hover {
+  background: transparent;
+  color: var(--cream);
+}

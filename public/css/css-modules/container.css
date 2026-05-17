@@ -1,0 +1,63 @@
+/*LAYOUT PRINCIPAL */
+
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+section {
+  padding: 3.5rem 0;
+}
+@media (min-width: 960px) {
+  section {
+    padding: 5.5rem 0;
+  }
+}
+
+/*CLASSES DAS SECTIONS*/
+.hero {
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--muted);
+}
+.hero p.lede {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 38ch;
+  margin-bottom: 2rem;
+}
+.hero-image {
+  aspect-ratio: 4 / 5;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--muted);
+}
+@media (min-width: 960px) {
+  .hero {
+    padding: 7rem 0 6rem;
+  }
+}
+@media (min-width: 960px) {
+  .hero-grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+  }
+}

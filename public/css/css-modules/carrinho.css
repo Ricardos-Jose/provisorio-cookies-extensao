@@ -1,0 +1,111 @@
+.cart-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.cart-table th,
+.cart-table td {
+  text-align: left;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.cart-table th {
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.cart-table .item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+}
+.cart-table .item-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+.cart-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/*RESUMO CARRINHO */
+.summary {
+  border: 1px solid var(--line);
+  padding: 2rem;
+  background: var(--cream);
+}
+.summary h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+.summary .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.summary .row.total {
+  border-bottom: none;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--text);
+}
+.summary .actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.summary .actions .btn {
+  text-align: center;
+}
+
+@media (min-width: 960px) {
+  .cart-wrap {
+    grid-template-columns: 1.6fr 1fr;
+    gap: 4rem;
+  }
+}
+@media (max-width: 639px) {
+  .cart-table thead {
+    display: none;
+  }
+  .cart-table,
+  .cart-table tbody,
+  .cart-table tr,
+  .cart-table td {
+    display: block;
+    width: 100%;
+  }
+  .cart-table tr {
+    border-bottom: 1px solid var(--line);
+    padding: 1.25rem 0;
+  }
+  .cart-table td {
+    border: none;
+    padding: 0.15rem 0;
+  }
+  .cart-table .num {
+    text-align: left;
+  }
+  .cart-table .num::before {
+    content: attr(data-label);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-right: 0.5rem;
+  }
+}
