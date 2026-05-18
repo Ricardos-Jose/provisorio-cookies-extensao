@@ -75,7 +75,7 @@ export function renderCheckoutSummary() {
   if (items.length === 0) {
     summary.innerHTML =
       '<h2>Seu pedido</h2>' +
-      '<p style="color:var(--muted)">Seu carrinho está vazio. <a href="/index.html#produtos">Ver produtos</a>.</p>';
+      '<p style="color:var(--muted)">Seu carrinho está vazio. <a href="index.html#produtos">Ver produtos</a>.</p>';
     return;
   }
 

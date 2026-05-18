@@ -78,7 +78,7 @@ export function wireTrioForm() {
       qty: 1,
     });
     renderAll();
-    window.location.href = '/carrinho.html';
+    window.location.href = 'carrinho.html';
   });
 }
 
@@ -105,7 +105,7 @@ export function wireCheckoutForm() {
     const items = cart.getAll();
     if (items.length === 0) {
       alert('Seu carrinho está vazio.');
-      window.location.href = '/index.html#produtos';
+      window.location.href = 'index.html#produtos';
       return;
     }
     if (!form.checkValidity()) {
@@ -164,7 +164,7 @@ export function wireCheckoutForm() {
     window.open(url, '_blank');
     cart.clear();
     renderAll();
-    window.location.href = '/index.html?pedido=enviado';
+    window.location.href = 'index.html?pedido=enviado';
   });
 }
 
